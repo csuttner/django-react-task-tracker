@@ -8,21 +8,24 @@ function App() {
   const [tasks, setTasks] = useState([
     {
       id: 1,
-      text: 'Doctors Appointment',
+      title: 'Doctors Appointment',
       day: 'Feb 5th at 2:00PM',
-      reminder: true,
+      showDesc: false,
+      description: 'Meet Dr. Green at Sansum Clinic for a physical'
     },
     {
       id: 2,
-      text:  'Meeting at School',
+      title:  'Meeting at School',
       day: 'Feb 1st at 11:00AM',
-      reminder: true,
+      showDesc: false,
+      description: 'Meet with the computer science club to talk about coding and stuff'
     },
     {
       id: 3,
-      text: 'Grocery Shopping',
+      title: 'Grocery Shopping',
       day: 'Feb 2nd at 8:00AM',
-      reminder: false,
+      showDesc: false,
+      description: 'Go to Whole Foods to buy groceries from your pre-written list'
     },
   ])
 
@@ -31,21 +34,22 @@ function App() {
     setTasks(tasks.filter((task) => task.id !== id))
   }
 
-  // toggle reminder
-  const toggleReminder = (id) => {
+  // toggle showing description
+  const toggleShowDesc = (id) => {
     setTasks(
       tasks.map( (task) => 
-        task.id === id ? { ...task, reminder: !task.reminder } : task
-        )
+        task.id === id ? { ...task, showDesc: !task.showDesc } : task
       )
+    )
+    console.log('toggled', id)
   }
-
 
   // add tasks
   const addTask = (task) => {
-    const id = Math.floor( Math.random * 10000) + 1
-    const newTask = { id, ...task }
+    const id = Math.floor(Math.random() * 10000) + 1
+    const newTask = { ...task, id: id }
     setTasks([...tasks, newTask])
+    console.log('new task id: ', newTask.id)
   }
 
   return (
@@ -58,7 +62,7 @@ function App() {
       {tasks.length > 0 ? (
         <Tasks tasks={tasks}
         onDelete={deleteTask}
-        onToggle={toggleReminder} />
+        onToggle={toggleShowDesc} />
       ) : (
         'No Tasks To Show'
       )} 

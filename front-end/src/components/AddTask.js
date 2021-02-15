@@ -1,22 +1,24 @@
 import { useState } from 'react'
 
 const AddTask = ({ onAdd }) => {
-  const [text, setText] = useState('')
+  const [title, setTitle] = useState('')
   const [day, setDay] = useState('')
-  const [reminder, setReminder] = useState(false)
+  const [showDesc, setShowDesc] = useState(false)
+  const [description, setDescription] = useState('')
 
   const onSubmit = (e) => {
     e.preventDefault()
 
-    if(!text) {
+    if(!title) {
       alert('Please Add Task')
       return
     }
     
-    onAdd({ text, day, reminder })
-    setText('')
+    onAdd({ title, day, showDesc, description })
+    setTitle('')
     setDay('')
-    setReminder(false)
+    setShowDesc(false)
+    setDescription('')
   }
 
   return (
@@ -26,8 +28,8 @@ const AddTask = ({ onAdd }) => {
         <input 
           type='text' 
           placeholder='Add Task' 
-          value={text}
-          onChange={(e) => setText(e.target.value)} 
+          value={title}
+          onChange={(e) => setTitle(e.target.value)} 
         ></input>
       </div>
       <div className='form-control'>
@@ -40,13 +42,11 @@ const AddTask = ({ onAdd }) => {
         ></input>
       </div>
       <div className='form-control'>
-        <label>Set Reminder</label>
+        <label>Description</label>
         <input 
-          className='check' 
-          type='checkbox'
-          checked={reminder}
-          value={reminder}
-          onChange ={(e) => setReminder(e.currentTarget.checked)} 
+          type='Text' 
+          value={description}
+          onChange ={(e) => setDescription(e.target.value)} 
         ></input>
         <input type='submit' value='Save Task' className='btn btn-block'/>
       </div>
