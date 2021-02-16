@@ -1,30 +1,27 @@
 import { useState } from 'react'
+import { useEffect } from 'react'
 import Header from  './components/Header'
 import Tasks from './components/Tasks'
 import AddTask from './components/AddTask'
 
 function App() {
   const [showAddTask, setShowAddTask] = useState(false)
-  const [tasks, setTasks] = useState([
-    {
-      id: 1,
-      title: 'Doctors Appointment',
-      day: 'Feb 5th at 2:00PM',
-      description: 'Meet Dr. Green at Sansum Clinic for a physical'
-    },
-    {
-      id: 2,
-      title:  'Meeting at School',
-      day: 'Feb 1st at 11:00AM',
-      description: 'Meet with the computer science club to talk about coding and stuff'
-    },
-    {
-      id: 3,
-      title: 'Grocery Shopping',
-      day: 'Feb 2nd at 8:00AM',
-      description: 'Go to Whole Foods to buy groceries that are too expensive'
-    },
-  ])
+  const [tasks, setTasks] = useState({})
+
+  // update data from API on load
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const res = await fetch('http://127.0.0.1:8000/api/');
+        const tsks = await res.json();
+        setTasks(tsks);
+      } catch (e) {
+        console.log(e);
+      }
+    }
+
+    fetchData()
+  }, [])
 
   // delete task
   const deleteTask = (id) => {
