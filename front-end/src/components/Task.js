@@ -2,21 +2,22 @@ import { useState } from 'react'
 import { FaTimes } from 'react-icons/fa'
 
 const Task = ({ task, onDelete, onToggle }) => {
+  const [showDesc, setShowDesc] = useState(false)
 
   return (
     <div 
       className='task' 
-      onDoubleClick={() => onToggle(task.id)}>
+      onDoubleClick={() => setShowDesc(!showDesc)}>
       <h3>
         {task.title}{' '}
         <FaTimes style={{ 
-          color: 'red', 
+          color: 'red',
           cursor: 'pointer'
         }}
         onClick={() => onDelete(task.id)}/>
       </h3>
       <p>{task.day}</p>
-      {task.showDesc && <p>{task.description}</p>}
+      {showDesc && <p>{task.description}</p>}
     </div>
   )
 }

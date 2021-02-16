@@ -10,22 +10,19 @@ function App() {
       id: 1,
       title: 'Doctors Appointment',
       day: 'Feb 5th at 2:00PM',
-      showDesc: false,
       description: 'Meet Dr. Green at Sansum Clinic for a physical'
     },
     {
       id: 2,
       title:  'Meeting at School',
       day: 'Feb 1st at 11:00AM',
-      showDesc: false,
       description: 'Meet with the computer science club to talk about coding and stuff'
     },
     {
       id: 3,
       title: 'Grocery Shopping',
       day: 'Feb 2nd at 8:00AM',
-      showDesc: false,
-      description: 'Go to Whole Foods to buy groceries from your pre-written list'
+      description: 'Go to Whole Foods to buy groceries that are too expensive'
     },
   ])
 
@@ -41,7 +38,6 @@ function App() {
         task.id === id ? { ...task, showDesc: !task.showDesc } : task
       )
     )
-    console.log('toggled', id)
   }
 
   // add tasks
