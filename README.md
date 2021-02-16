@@ -21,9 +21,13 @@ python manage.py createsuperuser
 python manage.py runserver
 ```
 4. Add data:
+
 Navigate to http://localhost:8000/admin
+
 Log in with your superuser credentials
+
 Add tasks
+
 
 3. Start frontend:
 (Open new terminal window or tab)
@@ -32,4 +36,5 @@ cd task-tracker/front-end
 npm start
 ```
 Browser should open app and display tasks you added
+
 Double clicking should toggle display of task description
